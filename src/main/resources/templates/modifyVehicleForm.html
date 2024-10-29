@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head th:replace="shared/shared :: head" />
+
+    <body>
+        <header th:replace="shared/shared :: header"></header>
+        <div class="container body-container">
+            <div class="row row-cols-1 justify-content-center">
+                <div class="card col-8 align-items-center text-center">
+                    <div th:if="${ubicationError}" th:text="${ubicationError}" class="alert alert-danger mt-4" role="alert"></div>
+                    <div th:if="${placaError}" th:text="${placaError}" class="alert alert-danger mt-4" role="alert"></div>
+                    <div class="card-body">
+                        <h1 class="card-title mb-4" th:text="${valor} + ' Estancia Vehículo'"></h1>
+                        <div class="card-text px-5">
+                            <form method="post" th:action="@{/vehicle/insert}" th:object="${newVeh}">
+                                <div class="row row-cols-2">
+                                    <div class="form-group mb-4">
+                                        <label for="name">Placa</label>
+                                        <input type="text" class="form-control" name="placa" th:field="*{placa}" id="placa" required
+                                               placeholder="Número de Placa">
+                                        <span th:if="${#fields.hasErrors('placa')}" th:errors="*{placa}" class="error"></span>
+                                    </div>
+                                    <div class="form-group mb-4">
+                                        <label for="ubicacion">Ubicación</label>
+                                        <input type="text" class="form-control" name="ubicacion" th:field="*{ubicacion}" id="ubicacion"
+                                               required placeholder="Ubicación">
+                                        <span th:if="${#fields.hasErrors('ubicacion')}" th:errors="*{ubicacion}" class="error" ></span>
+                                    </div>
+                                </div>
+                                <div class="row row-cols-2">
+                                    <div class="form-group mb-4">
+                                        <label for="entrada">Hora Entrada</label>
+                                        <input type="number" class="form-control" name="entrada" th:field="*{entrada}" id="entrada"
+                                               min="0" max="24" required placeholder="Hora de Entrada">
+                                        <span th:if="${#fields.hasErrors('entrada')}" th:errors="*{entrada}" class="error"></span>
+                                    </div>
+                                    <div th:if="${newVeh.id != null}" class="form-group mb-4">
+                                        <label for="salida">Hora de Salida</label>
+                                        <input type="number" class="form-control" name="salida" th:field="*{salida}" id="salida" min="0" max="24"
+                                               placeholder="Hora de Salida">
+                                        <span th:if="${#fields.hasErrors('salida')}" th:errors="*{salida}" class="error"></span>
+                                    </div>
+                                    <div th:if="${newVeh.id == null}" class="form-group mb-4">
+                                        <label for="salida">Hora de Salida</label>
+                                        <input type="number" class="form-control" name="salida" th:field="*{salida}" id="salida"
+                                               placeholder="Hora de salida" disabled>
+                                    </div>
+                                </div>
+                                <div class="row row-cols-1 justify-content-center">
+                                    <div class="col-8">
+                                        <label for="type">Tipo de Vehículo</label>
+                                        <select name="type" th:field="*{type.name}" class="form-select mb-4" required>
+                                            <option value="Carro" selected>Carro</option>
+                                            <option value="Moto">Moto</option>
+                                            <option value="Camión">Camión</option>
+                                            <option value="Tractomula">Tractomula</option>
+                                            <option value="Tractomula">Cicla</option>
+                                            <option value="Tractomula">Patineta</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <input type="hidden" name="id" th:field="*{id}"/>
+                                <input class="btn btn-primary" type="submit" th:value="Guardar" />
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+
+</html>

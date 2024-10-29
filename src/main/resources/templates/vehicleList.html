@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head th:replace="shared/shared :: head"></head>
+    <body>
+        <header th:replace="shared/shared :: header"></header>
+        <div class="container body-container  justify-content-center align-items-center">
+            <a th:href="@{/vehicle/add}" class="btn btn-primary">Añadir Estancia de Vehículo</a>
+            <div th:if="${vehicles != null and !vehicles.empty}">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Placa</th>
+                            <th scope="col">Hora Entrada</th>
+                            <th scope="col">Hora Salida</th>
+                            <th scope="col">Ubicación</th>
+                            <th scope="col">Tipo Vehículo</th>
+                            <th scope="col">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="vehicle : ${vehicles}">
+                            <td th:text="${vehicle.placa}"></td>
+                            <td th:text="${vehicle.entrada}"></td>
+                            <td th:text="${vehicle.salida}"></td>
+                            <td th:text="${vehicle.ubicacion}"></td>
+                            <td th:text="${vehicle.type.name}"></td>
+                            <td>
+                                <a th:href="@{/vehicle/modify/} + ${vehicle.id}"><input type="button" class="btn btn-primary" th:value="Modificar"></a>
+                                <a th:href="@{/vehicle/delete/} + ${vehicle.id}"><input type="button" class="btn btn-danger" th:value="Eliminar" 
+                                                                                          onclick="if (!confirm('¿Estás seguro de eliminar esta Estancia de Vehículo'))
+                                                                                     return false;"></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div th:if="${vehicles == null or vehicles.empty}">
+                <div class="card col-8 align-items-center text-center">
+                    <div class="card-body">
+                        <h1 class="card-title">No hay Estancias Registradas</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

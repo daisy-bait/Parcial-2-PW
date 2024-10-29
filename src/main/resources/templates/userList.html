@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head th:replace="shared/shared :: head"></head>
+    <body>
+        <header th:replace="shared/shared :: header"></header>
+        <div class="container body-container  justify-content-center align-items-center">
+            <div th:if="${users != null and !users.empty}">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Nombre</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="user : ${users}">
+                            <td th:text="${user.username}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div th:if="${users == null or users.empty}">
+                <div class="card col-8 align-items-center text-center">
+                    <div class="card-body">
+                        <h1 class="card-title">No hay Docentes Registrados</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

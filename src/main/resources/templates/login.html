@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head th:replace="shared/shared :: head" />
+
+    <body>
+        <div class="container body-container">
+            <div class="row row-cols-1 justify-content-center">
+                <div class="card col-8 align-items-center text-center">
+                    <div th:if="${param.error}" th:text="Usuario o Contraseña incorrectos" class="alert alert-danger mt-4" role="alert"></div>
+                    <div th:if="${param.logout}" th:text="Has cerrado sesión exitosamente" class="alert alert-info mt-4" role="alert"></div>
+                    <div class="card-body">
+                        <h1 class="card-title mb-4">Iniciar Sesión</h1>
+                        <div class="card-text">
+                            <form method="post" th:action="@{/loginPage}">
+                                <div class="form-group mb-4">
+                                    <label for="username">Nombre de Usuario</label>
+                                    <input type="text" class="form-control" name="username" id="username" placeholder="Ingresa tu Username" required>
+                                </div>
+                                <div class="form-group mb-4">
+                                    <label for="exampleInputPassword1">Contraseña</label>
+                                    <input type="password" class="form-control" name="password" id="password" placeholder="Ingresa tu contraseña" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Iniciar Seción</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
