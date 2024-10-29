@@ -42,7 +42,6 @@ public class adminController {
     }
 
     @PostMapping("/insert")
-    @Operation(summary = "Insertar un vehículo", description = "Inserta los datos de un nuevo vehículo")
     public String insertVehicle(
             @Valid
             @Parameter(description = "Datos básicos para insertar una Estancia de Vehículo")
@@ -108,6 +107,7 @@ public class adminController {
         }
     }
 
+    
     @GetMapping("/modify/{id}")
     public String modifyVehicle(@PathVariable Long id, Model model) {
 
