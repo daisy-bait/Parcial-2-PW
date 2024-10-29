@@ -27,7 +27,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(request -> {
 
                     // Configurando endpoints públicos
-                    request.requestMatchers("/loginPage", "/", "/swagger-ui/**", "/v3/api-docs/**").permitAll();
+                    request.requestMatchers("/loginPage", "/", "/swagger-ui/**", "/v3/api-docs/**", "/api/**").permitAll();
                     
                     // Configurando endpoints privados
                     request.requestMatchers("/vehicle/add",

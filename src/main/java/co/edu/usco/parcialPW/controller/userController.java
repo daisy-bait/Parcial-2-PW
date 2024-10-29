@@ -68,4 +68,9 @@ public class userController {
         return "redirect:/loginPage?logout"; 
 
     }
+    
+    @GetMapping("/403")
+    public String showForbidden() {
+        return "403";
+    }
 }

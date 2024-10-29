@@ -4,7 +4,7 @@ import co.edu.usco.parcialPW.persistence.entity.Type;
 import co.edu.usco.parcialPW.persistence.entity.Vehicle;
 import co.edu.usco.parcialPW.persistence.repository.UserRepository;
 import co.edu.usco.parcialPW.service.impl.VehicleService;
-import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import java.util.Optional;
@@ -29,6 +29,7 @@ public class adminController {
     @Autowired
     UserRepository userRepo;
 
+    @Operation(summary = "Mostrar Formulario para añadir o modificar una estancia de vehículo")
     @GetMapping("/add")
     public String addVehicle(Model model) {
 
@@ -41,11 +42,9 @@ public class adminController {
         return "modifyVehicleForm";
     }
 
+    @Operation(summary = "Conectarse al servicio para añadir o modificar una estancia de vehículo")
     @PostMapping("/insert")
-    public String insertVehicle(
-            @Valid
-            @Parameter(description = "Datos básicos para insertar una Estancia de Vehículo")
-            @ModelAttribute("newVeh") Vehicle vehicle, Errors error, Model model) {
+    public String insertVehicle(@Valid @ModelAttribute("newVeh") Vehicle vehicle, Errors error, Model model) {
 
         Optional<Vehicle> optVehUbi = vehService.findByUbication(vehicle.getUbicacion());
         Optional<Vehicle> optVehPlaca = vehService.findByPlaca(vehicle.getPlaca());
@@ -57,6 +56,7 @@ public class adminController {
                 model.addAttribute("valor", "Añadir");
                 return "modifyVehicleForm";
             }
+
         } else { //Verificar si es UPDATE
 
             //Verificar si se quiere modificar placa o ubicación y que no sea de un carro ya estacionado
@@ -107,7 +107,7 @@ public class adminController {
         }
     }
 
-    
+    @Operation(summary = "Devuelve al formulario de insertar vehículo pero esta vez para modificarlo")
     @GetMapping("/modify/{id}")
     public String modifyVehicle(@PathVariable Long id, Model model) {
 
@@ -118,6 +118,7 @@ public class adminController {
         return "modifyVehicleForm";
     }
 
+    @Operation(summary = "Se conecta al servicio para eliminar un vehículo")
     @GetMapping("/delete/{id}")
     public String deleteVehicle(@PathVariable Long id) {
 

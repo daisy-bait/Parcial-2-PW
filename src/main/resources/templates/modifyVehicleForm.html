@@ -29,10 +29,16 @@
                                     </div>
                                 </div>
                                 <div class="row row-cols-2">
-                                    <div class="form-group mb-4">
+                                    <div th:if="${newVeh.id == null}" class="form-group mb-4">
                                         <label for="entrada">Hora Entrada</label>
                                         <input type="number" class="form-control" name="entrada" th:field="*{entrada}" id="entrada"
                                                min="0" max="24" required placeholder="Hora de Entrada">
+                                        <span th:if="${#fields.hasErrors('entrada')}" th:errors="*{entrada}" class="error"></span>
+                                    </div>
+                                    <div th:if="${newVeh.id != null}" class="form-group mb-4">
+                                        <label for="entrada">Hora Entrada</label>
+                                        <input type="number" class="form-control" name="entrada" th:field="*{entrada}" id="entrada"
+                                               placeholder="Hora de Entrada" disabled>
                                         <span th:if="${#fields.hasErrors('entrada')}" th:errors="*{entrada}" class="error"></span>
                                     </div>
                                     <div th:if="${newVeh.id != null}" class="form-group mb-4">
@@ -60,6 +66,7 @@
                                         </select>
                                     </div>
                                 </div>
+                                <input th:if="${newVeh.id != null}" type="hidden" name="id" th:field="*{entrada}"/>
                                 <input type="hidden" name="id" th:field="*{id}"/>
                                 <input class="btn btn-primary" type="submit" th:value="Guardar" />
                             </form>
