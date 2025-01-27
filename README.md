@@ -1,10 +1,10 @@
 # Parcial II PW
 Para la elaboración del parcial se utilizó la base de datos SQL phpMyAdmin, en mi caso, el proyecto se conecta al puerto 3307, si lo tu base de datos escucha el 3306, cámbialo en el ``application.properties`` del proyecto, la base de datos se nombró ``parcial_2``
 
->[!Base de Datos]
+>[!TIP]
 >Las tablas de la base de datos las crea el proyecto o se pueden insertar en la base de datos manualmente
 
->[!Encriptación]
+>[!WARNING]
 >El proyecto viene por defecto sin encriptación
 ### SQL Para Creación Tablas
 ```SQL
